@@ -77,13 +77,16 @@ public void setup(){
 
 public void draw(){
   if(key == '1' && isPlaying == false){
-    println("Nivel 1");
+    mainMenu();
+    //println("Nivel 1");
      level = 1;
   }else if (key == '2'  && isPlaying == false){
-    println("Nivel 2");
+    mainMenu();
+    //println("Nivel 2");
     level = 2;
   }else if (key == '3'  && isPlaying == false){
-    println("Nivel 3");
+    mainMenu();
+    //println("Nivel 3");
     level = 3;
   }else if((key == 'F' || key == 'f') && isPlaying == false){
     mainMenu();
@@ -170,7 +173,7 @@ public void mainMenu(){
   image(galaxyImage,0,0);
   textSize(42);
   textAlign(CENTER);
-  menuFont = createFont("Algerian",42);                            //font when the player wins
+  menuFont = createFont("Algerian",38);                            //font when the player wins
   textFont(menuFont);
   fill(255);                                                       //color of font
   text("Bienvenido a Brick Breaker",centerX,100);   
@@ -185,9 +188,10 @@ public void mainMenu(){
   textSize(25);
   text("Modo de juego seteado: " + nivel, centerX, 350);
   textSize(25);
-  text("Presiona P para jugar", centerX, 450);
-  textSize(18);
-  text("Presione una tecla",centerX, 500);
+  text("Nivel: " + level, centerX, 450);
+  textSize(25);
+  text("Presione P para jugar", centerX, 550);
+  
 }
 
 public void win(){
