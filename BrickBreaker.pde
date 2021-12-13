@@ -78,45 +78,6 @@ void draw(){
   }else {
     pauseScreen();
   }
-  //println("isPlaying: "+ isPlaying);
-  //println("canChange: "+ canChange);
- 
-
- /* if(key == '1' && isPlaying == false){
-    mainMenu();
-    level = 1;
-  }else if (key == '2'  && isPlaying == false){
-    mainMenu();
-    level = 2;
-  }else if (key == '3'  && isPlaying == false){
-    mainMenu();
-    level = 3;
-  }else if((key == 'F' || key == 'f') && isPlaying == false){
-    mainMenu();
-    resetAll(5,240,10);      
-    nivel = "Facil";
-  }else if((key == 'M'|| key == 'm') && isPlaying == false){
-    mainMenu();
-    resetAll(3,180,15);
-    nivel = "Medio";
-  }else if((key == 'D' || key == 'd') && isPlaying == false){
-    mainMenu();
-    resetAll(2,150,20);
-    nivel = "Dificil";
-  }else if((key == 'P' || key == 'p')){
-    play();
-  }else if ((key == 'V' || key == 'v') && isPlaying == false){
-    mainMenu();
-    resetAll(3,180,15);
-    nivel =  "Medio";
-  }else if ((key == 'L' || key == 'l') && isPlaying == false){
-    lose();
-  }else if ((key == 'W' || key == 'w') && isPlaying == false){
-    win();
-  }else{
-    isPlaying=false;
-  }
-  println(isPlaying);*/
 }
 
 
