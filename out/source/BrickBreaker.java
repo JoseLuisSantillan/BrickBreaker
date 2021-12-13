@@ -40,53 +40,75 @@ int score,numberOfBalls,totalScore;                      //variables for score a
 PFont winFont, defaultFont, loseFont, menuFont;          //instances of fonts
 int streak, auxStreak;                                   //variables for Streak
 boolean isPlaying;
-String nivel = "Por escoger";                            //variable for mainMenu
+boolean canChange;
+String nivel = "Por escoger" ;                            //variable for mainMenu
 int s = 0;                                               //extra variable
 int x = 0;
-int level;                                               //variable for levels
+int level = 1;                                               //variable for levels
 
 public void setup(){
   
   background(0);
-  centerX = width/2; //<>//
+  centerX = width/2; 
   centerY = height/2;
   mainMenu();
   isPlaying = false;
+  canChange = true;
   numberOfBalls = 3;      
   balls = new ArrayList<Ball>();
   platform = new Platform(centerX, height - 100);
   balls.add(new Ball(centerX, height - 200));
-  //ball = new Ball(centerX, height - 200);
   timer = new Timer(180);
   streak = 0;
   auxStreak = 15;
   bounceAudio = new SoundFile(this, "contactmic_1.mp3");
   gameOverAudio =  new SoundFile(this, "gameOver.wav");
   winAudio = new SoundFile(this, "win.wav");
-  nivel = "Medio";
-  level = 1;
-  
-  /*Place indivual bricks in an array of BRICKS*/
-  /*for (int i = 0; i < rows; i++){
-    for (int j = 0; j< columns; j++){
-      arrayOfBricks[i*rows + j] = new Brick((i+0.1) * width/(rows), (j+1) * (height/24));         //the numbers were obtained by trial and error
-    }
-  }*/
 
 }
 
 public void draw(){
-  if(key == '1' && isPlaying == false){
+
+  if((key == 'P' || key == 'p')){
+    play();
+    //canChange = false;
+  }else if(isPlaying == false && canChange == true){
     mainMenu();
-    //println("Nivel 1");
-     level = 1;
+    if((key == 'F' || key == 'f') && isPlaying == false && canChange == true){
+      resetAll(5,240,10);      
+      nivel = "Facil";
+    }else if((key == 'M'|| key == 'm') && isPlaying == false && canChange == true){
+      resetAll(3,180,15);
+      nivel = "Medio";
+    }else if((key == 'D' || key == 'd') && isPlaying == false && canChange == true){
+      resetAll(2,150,20);
+      nivel = "Dificil";
+    }else if(key == '1' && isPlaying == false && canChange == true){
+      level = 1;
+    }else if (key == '2'  && isPlaying == false && canChange == true){
+      level = 2;
+    }else if (key == '3'  && isPlaying == false && canChange == true){
+      level = 3;
+    }else if ((key == 'V' || key == 'v') && isPlaying == false && canChange == true){
+      mainMenu();
+      resetAll(3,180,15);
+      nivel =  "Medio";
+    }
+  }else {
+    pauseScreen();
+  }
+  //println("isPlaying: "+ isPlaying);
+  //println("canChange: "+ canChange);
+ 
+
+ /* if(key == '1' && isPlaying == false){
+    mainMenu();
+    level = 1;
   }else if (key == '2'  && isPlaying == false){
     mainMenu();
-    //println("Nivel 2");
     level = 2;
   }else if (key == '3'  && isPlaying == false){
     mainMenu();
-    //println("Nivel 3");
     level = 3;
   }else if((key == 'F' || key == 'f') && isPlaying == false){
     mainMenu();
@@ -102,7 +124,6 @@ public void draw(){
     nivel = "Dificil";
   }else if((key == 'P' || key == 'p')){
     play();
-    println(isPlaying);
   }else if ((key == 'V' || key == 'v') && isPlaying == false){
     mainMenu();
     resetAll(3,180,15);
@@ -111,7 +132,10 @@ public void draw(){
     lose();
   }else if ((key == 'W' || key == 'w') && isPlaying == false){
     win();
+  }else{
+    isPlaying=false;
   }
+  println(isPlaying);*/
 }
 
 
@@ -194,6 +218,20 @@ public void mainMenu(){
   
 }
 
+public void pauseScreen(){
+  galaxyImage = loadImage("galaxy.jpg");
+  imageMode(CORNER);
+  image(galaxyImage,0,0);
+  textSize(42);
+  textAlign(CENTER);
+  menuFont = createFont("Algerian",38);                            //font when the player wins
+  textFont(menuFont);
+  fill(255);                                                       //color of font
+  text("Pausa",centerX,100); 
+  textSize(25);
+  text("Presione P para reanudar", centerX, 550);
+}
+
 public void win(){
   //background(0);
   winImage = loadImage("ganaste.jpg");
@@ -267,6 +305,7 @@ public void lose(){
 
 public void play(){
   isPlaying = true;
+  canChange = false;
   background(255);
   /*Run the timer*/
   timer.runTimer();
@@ -430,6 +469,7 @@ public void play(){
   if(numberOfBalls <= 0 || timer.seconds < 0){
     lose();
     isPlaying = false;
+    canChange = true;
   }
   
   /*Condition to win*/
@@ -437,7 +477,7 @@ public void play(){
     totalScore = score + numberOfBalls * 50;                        //each ball left is 50 extra points to the total score.
     win();
     isPlaying = false;
-    
+    canChange = true;
   }
 
 }
