@@ -9,7 +9,7 @@ import processing.sound.*;
 
 int rows;                                                //variable for number of rows
 int columns;                                             //variable for number of bricks
-int sizeOfArrayOfBricks; 
+int sizeOfArrayOfBricks;                                 //variable for size of arrayOfBricks
 Brick[] arrayOfBricks;                                   //array of bricks
 ArrayList <Ball> balls;
 Platform platform;                                       //instance of platform class
