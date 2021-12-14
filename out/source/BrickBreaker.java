@@ -33,7 +33,7 @@ ArrayList <Ball> balls;
 Platform platform;                                       //instance of platform class
 //Ball ball ;                                            //instance of ball class
 Timer timer;                                             //instance of timer class
-PImage galaxyImage, winImage, loseImage;
+PImage galaxyImage, winImage, loseImage, pauseImage;
 SoundFile bounceAudio, gameOverAudio, winAudio;          //instance of SoundFile class
 float centerX,centerY;                                   //variables for center X and Y
 int score,numberOfBalls,totalScore;                      //variables for score and lives
@@ -71,7 +71,6 @@ public void draw(){
 
   if((key == 'P' || key == 'p')){
     play();
-    //canChange = false;
   }else if(isPlaying == false && canChange == true){
     mainMenu();
     if((key == 'F' || key == 'f') && isPlaying == false && canChange == true){
@@ -97,45 +96,6 @@ public void draw(){
   }else {
     pauseScreen();
   }
-  //println("isPlaying: "+ isPlaying);
-  //println("canChange: "+ canChange);
- 
-
- /* if(key == '1' && isPlaying == false){
-    mainMenu();
-    level = 1;
-  }else if (key == '2'  && isPlaying == false){
-    mainMenu();
-    level = 2;
-  }else if (key == '3'  && isPlaying == false){
-    mainMenu();
-    level = 3;
-  }else if((key == 'F' || key == 'f') && isPlaying == false){
-    mainMenu();
-    resetAll(5,240,10);      
-    nivel = "Facil";
-  }else if((key == 'M'|| key == 'm') && isPlaying == false){
-    mainMenu();
-    resetAll(3,180,15);
-    nivel = "Medio";
-  }else if((key == 'D' || key == 'd') && isPlaying == false){
-    mainMenu();
-    resetAll(2,150,20);
-    nivel = "Dificil";
-  }else if((key == 'P' || key == 'p')){
-    play();
-  }else if ((key == 'V' || key == 'v') && isPlaying == false){
-    mainMenu();
-    resetAll(3,180,15);
-    nivel =  "Medio";
-  }else if ((key == 'L' || key == 'l') && isPlaying == false){
-    lose();
-  }else if ((key == 'W' || key == 'w') && isPlaying == false){
-    win();
-  }else{
-    isPlaying=false;
-  }
-  println(isPlaying);*/
 }
 
 
@@ -219,15 +179,17 @@ public void mainMenu(){
 }
 
 public void pauseScreen(){
-  galaxyImage = loadImage("galaxy.jpg");
-  imageMode(CORNER);
-  image(galaxyImage,0,0);
+  background(0);
+  pauseImage = loadImage("pausa.jpg");
+  //pauseImage.resize(300,300);
+  imageMode(CENTER);
+  image(pauseImage,300,300);
   textSize(42);
   textAlign(CENTER);
   menuFont = createFont("Algerian",38);                            //font when the player wins
   textFont(menuFont);
   fill(255);                                                       //color of font
-  text("Pausa",centerX,100); 
+  text("Juego pausado",centerX,100); 
   textSize(25);
   text("Presione P para reanudar", centerX, 550);
 }

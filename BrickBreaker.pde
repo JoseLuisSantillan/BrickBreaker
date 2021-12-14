@@ -15,7 +15,7 @@ ArrayList <Ball> balls;
 Platform platform;                                       //instance of platform class
 //Ball ball ;                                            //instance of ball class
 Timer timer;                                             //instance of timer class
-PImage galaxyImage, winImage, loseImage;
+PImage galaxyImage, winImage, loseImage, pauseImage;
 SoundFile bounceAudio, gameOverAudio, winAudio;          //instance of SoundFile class
 float centerX,centerY;                                   //variables for center X and Y
 int score,numberOfBalls,totalScore;                      //variables for score and lives
@@ -161,15 +161,16 @@ void mainMenu(){
 }
 
 void pauseScreen(){
-  galaxyImage = loadImage("galaxy.jpg");
-  imageMode(CORNER);
-  image(galaxyImage,0,0);
+  background(0);
+  pauseImage = loadImage("pausa.jpg");
+  imageMode(CENTER);
+  image(pauseImage,300,300);
   textSize(42);
   textAlign(CENTER);
   menuFont = createFont("Algerian",38);                            //font when the player wins
   textFont(menuFont);
   fill(255);                                                       //color of font
-  text("Pausa",centerX,100); 
+  text("Juego pausado",centerX,100); 
   textSize(25);
   text("Presione P para reanudar", centerX, 550);
 }
