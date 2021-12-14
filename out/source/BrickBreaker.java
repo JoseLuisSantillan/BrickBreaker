@@ -146,7 +146,8 @@ public void build(int rows_, int columns_){
 public void mouseClicked(){
   for(int c = balls.size()-1; c >= 0; c--){
     Ball ball = balls.get(c);
-    ball.isBallMoving = !ball.isBallMoving;
+    //ball.isBallMoving = !ball.isBallMoving;
+    ball.isBallMoving = true;
   }
 }
 
@@ -181,7 +182,6 @@ public void mainMenu(){
 public void pauseScreen(){
   background(0);
   pauseImage = loadImage("pausa.jpg");
-  //pauseImage.resize(300,300);
   imageMode(CENTER);
   image(pauseImage,300,300);
   textSize(42);
