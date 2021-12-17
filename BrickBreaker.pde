@@ -265,7 +265,7 @@ void play(){
   platform.drawPlatform();
   platform.movePlatform(mouseX);
   
-  for(int c = balls.size()-1; c >= 0; c--){   //
+  for(int c = balls.size()-1; c >= 0; c--){   
     Ball ball = balls.get(c);
     /*Draw a ball and moves it in case of a mouseClick event*/
     
