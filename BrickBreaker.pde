@@ -21,12 +21,11 @@ float centerX,centerY;                                   //variables for center 
 int score,numberOfBalls,totalScore;                      //variables for score and lives
 PFont winFont, defaultFont, loseFont, menuFont;          //instances of fonts
 int streak, auxStreak;                                   //variables for Streak
-boolean isPlaying;
+boolean isPlaying;                                       //
 boolean canChange;
 String nivel = "Por escoger" ;                            //variable for mainMenu
-int s = 0;                                               //extra variable
-int x = 0;
-int level = 1;                                               //variable for levels
+int s = 0;                                               //extra variable for sound
+int level = 1;                                            //variable for levels
 
 void setup(){
   size(600,600);
@@ -78,6 +77,7 @@ void draw(){
   }else {
     pauseScreen();
   }
+  
 }
 
 
@@ -103,6 +103,10 @@ void resetAll(int numberOfBalls_, int time_, int auxStreak_){
   totalScore = 0;
   for(int c = balls.size()-1; c >= 0; c--){
     Ball ball = balls.get(c);
+    /*In case you win and stay with more than one ball in the array because of streak in previous level*/
+    if (balls.size()!=1) {
+        balls.remove(c);
+    }
     ball.resetBall(centerX, height - 200);
   }
   timer.setTime(time_);
@@ -125,16 +129,15 @@ void build(int rows_, int columns_){
     }
 }
 
+/*Moves the ball when mouse is clicked*/
 void mouseClicked(){
   for(int c = balls.size()-1; c >= 0; c--){
     Ball ball = balls.get(c);
     ball.isBallMoving = true;
-    
   }
 }
 
 void mainMenu(){
-  //background(0);
   galaxyImage = loadImage("galaxy.jpg");
   imageMode(CORNER);
   image(galaxyImage,0,0);
@@ -177,7 +180,6 @@ void pauseScreen(){
 }
 
 void win(){
-  //background(0);
   winImage = loadImage("ganaste.jpg");
   winImage.resize(600,600);
   imageMode(CORNER);
@@ -213,7 +215,6 @@ void win(){
 }
 
 void lose(){
-  //background(0);
   loseImage = loadImage("perdiste.jpg");
   loseImage.resize(600,600);
   imageMode(CORNER);
@@ -251,6 +252,7 @@ void play(){
   isPlaying = true;
   canChange = false;
   background(255);
+
   /*Run the timer*/
   timer.runTimer();
   
@@ -263,7 +265,7 @@ void play(){
   platform.drawPlatform();
   platform.movePlatform(mouseX);
   
-  for(int c = balls.size()-1; c >= 0; c--){
+  for(int c = balls.size()-1; c >= 0; c--){   //
     Ball ball = balls.get(c);
     /*Draw a ball and moves it in case of a mouseClick event*/
     
@@ -379,10 +381,10 @@ void play(){
     
     //Streak                                        
     if((streak % auxStreak==0) && (streak!=0)){             
-      balls.add(new Ball(centerX, height - 400));     
-      ball.isBallMoving = true;
       numberOfBalls += 1;
       streak = 0;
+      balls.add(new Ball(centerX, height - 400));     
+      ball.isBallMoving = true;
       
     }
   
@@ -414,6 +416,7 @@ void play(){
     lose();
     isPlaying = false;
     canChange = true;
+    
   }
   
   /*Condition to win*/
@@ -422,6 +425,7 @@ void play(){
     win();
     isPlaying = false;
     canChange = true;
+    
   }
 
 }
